@@ -6,3 +6,4 @@ let anioActual=parseInt(prompt("Ingrese el año actual:"));
 let edad=anioActual-anio;
 
 alert("Bienvenido " + nombre+" "+apellido + ", su edad es: " + edad + " años");
+console.log("Bienvenido " + nombre+" "+apellido + ", su edad es: " + edad + " años");
