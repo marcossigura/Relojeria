@@ -9,8 +9,9 @@ function clasificarEdad(edad){
 }
 
 function verificarJubilacion(edad, sexo) {
-   if (edad >= 60 && sexo == "femenino")
+   if (edad >= 60 && sexo == "femenino"){
       return "puede jubilarse";
+   }
    else if (edad >= 65 && sexo == "masculino") {
       return "puede jubilarse";
    } else {
@@ -18,8 +19,32 @@ function verificarJubilacion(edad, sexo) {
    }
 }
 
-const mostrarResultado=(nombre, apellido, sexo, edad, categoria, jubilacion)=>{
-   alert(
+function calcularAños(edad, sexo){
+   let añosFaltantes;
+   if(edad<60 && sexo=="femenino"){
+      añosFaltantes=60-edad;
+      return añosFaltantes;
+   }
+   else if(edad<65 && sexo=="masculino"){
+      añosFaltantes=65-edad;
+      return añosFaltantes;
+   }
+}
+
+const mostrarResultado=(nombre, apellido, sexo, edad, categoria, jubilacion,años)=>{
+   if(edad<60 && sexo=="femenino" || edad<65 && sexo=="masculino" ){
+      alert(
+      "Nombre: " + nombre + "\n" +
+      "Apellido: " + apellido + "\n" +
+      "Sexo: " + sexo + "\n" +
+      "Edad: " + edad + "\n" +
+      "Categoria: " + categoria + "\n" +
+      "Jubilacion: " + jubilacion + "\n" +
+      "Años faltantes para jubilarte: " + años
+   );
+   }
+   else{
+      alert(
       "Nombre: " + nombre + "\n" +
       "Apellido: " + apellido + "\n" +
       "Sexo: " + sexo + "\n" +
@@ -27,6 +52,8 @@ const mostrarResultado=(nombre, apellido, sexo, edad, categoria, jubilacion)=>{
       "Categoria: " + categoria + "\n" +
       "Jubilacion: " + jubilacion
    );
+   }
+
 }
 
 let continuar="si";
@@ -38,8 +65,9 @@ while(continuar=="si"){
       
    const categoria=clasificarEdad(edad);
    const jubilacion=verificarJubilacion(edad, sexo);
+   const años=calcularAños(edad, sexo);
 
-   mostrarResultado(nombre, apellido,sexo,edad,categoria,jubilacion);
+   mostrarResultado(nombre, apellido,sexo,edad,categoria,jubilacion,años);
    
    continuar=prompt("¿Desea cargar a otra persona (si o no)?").toLowerCase();
 }
