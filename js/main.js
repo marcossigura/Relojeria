@@ -1,21 +1,47 @@
-const veces=parseInt(prompt("Ingrese la cantidad de personas a calcular su edad:"));
+function clasificarEdad(edad){
+   if(edad<=17){
+      return "niño/adolescente"
+   }else if(edad<=59){
+      return "adulto"
+   }else{
+      return "adulto mayor"
+   }
+}
 
-for(let i=0;i<veces;i++){
+function verificarJubilacion(edad, sexo) {
+   if (edad >= 60 && sexo == "femenino")
+      return "puede jubilarse";
+   else if (edad >= 65 && sexo == "masculino") {
+      return "puede jubilarse";
+   } else {
+      return "no puede jubilarse";
+   }
+}
 
-    let nombre=prompt("Ingrese su nombre:");
-    let apellido=prompt("Ingrese su apellido:");
-    let anio= parseInt(prompt("Ingrese su año de nacimiento:"));
-    let anioActual=parseInt(prompt("Ingrese el año actual:"));
+const mostrarResultado=(nombre, apellido, sexo, edad, categoria, jubilacion)=>{
+   alert(
+      "Nombre: " + nombre + "\n" +
+      "Apellido: " + apellido + "\n" +
+      "Sexo: " + sexo + "\n" +
+      "Edad: " + edad + "\n" +
+      "Categoria: " + categoria + "\n" +
+      "Jubilacion: " + jubilacion
+   );
+}
 
-    const edad=anioActual-anio;
+let continuar="si";
+while(continuar=="si"){
+   let nombre = prompt("Ingrese su nombre: ");
+   let apellido = prompt("Ingrese su apellido: ");
+   let sexo = prompt("Ingrese su sexo (Masculino o Femenino): ").toLowerCase();
+   let edad = parseInt(prompt("Ingrese su edad:"));
+      
+   const categoria=clasificarEdad(edad);
+   const jubilacion=verificarJubilacion(edad, sexo);
 
-    if(edad>=18){
-       alert("Bienvenido " + nombre+" "+apellido + ", su edad es: " + edad + " años y eres mayor de edad");
-       console.log("Bienvenido " + nombre+" "+apellido + ", su edad es: " + edad + " años y eres mayor de edad");
-    }else{
-    alert("Bienvenido " + nombre+" "+apellido + ", su edad es: " + edad + " años y eres menor de edad");
-       console.log("Bienvenido " + nombre+" "+apellido + ", su edad es: " + edad + " años y eres menor de edad");
-    }
+   mostrarResultado(nombre, apellido,sexo,edad,categoria,jubilacion);
+   
+   continuar=prompt("¿Desea cargar a otra persona (si o no)?").toLowerCase();
 }
 
 
