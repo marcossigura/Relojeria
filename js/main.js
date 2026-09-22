@@ -1,4 +1,5 @@
 function clasificarEdad(edad){
+
    if(edad<=17){
       return "niño/adolescente"
    }else if(edad<=59){
@@ -9,6 +10,7 @@ function clasificarEdad(edad){
 }
 
 function verificarJubilacion(edad, sexo) {
+
    if (edad >= 60 && sexo == "femenino"){
       return "puede jubilarse";
    }
@@ -20,7 +22,9 @@ function verificarJubilacion(edad, sexo) {
 }
 
 function calcularAños(edad, sexo){
+
    let añosFaltantes;
+
    if(edad<60 && sexo=="femenino"){
       añosFaltantes=60-edad;
       return añosFaltantes;
@@ -32,6 +36,7 @@ function calcularAños(edad, sexo){
 }
 
 const mostrarResultado=(nombre, apellido, sexo, edad, categoria, jubilacion,años)=>{
+
    if(edad<60 && sexo=="femenino" || edad<65 && sexo=="masculino" ){
       alert(
       "Nombre: " + nombre + "\n" +
@@ -56,8 +61,19 @@ const mostrarResultado=(nombre, apellido, sexo, edad, categoria, jubilacion,año
 
 }
 
+const personasRegistradas=["Laura Gómez", "Nicolás Pérez", "Marta Díaz", "Juan Gimenez", "Carla Ruiz"];
+
+function listarRegistrados(personasRegistradas){
+
+   console.log("Personas registradas");
+   for(const persona of personasRegistradas){
+      console.log("Persona:" + persona);
+   }
+}
+
 let continuar="si";
 while(continuar=="si"){
+
    let nombre = prompt("Ingrese su nombre: ");
    let apellido = prompt("Ingrese su apellido: ");
    let sexo = prompt("Ingrese su sexo (Masculino o Femenino): ").toLowerCase();
@@ -69,8 +85,36 @@ while(continuar=="si"){
 
    mostrarResultado(nombre, apellido,sexo,edad,categoria,jubilacion,años);
    
+   const nombreCompleto=nombre + " " + apellido;
+
+   if(jubilacion=="puede jubilarse"){
+      personasRegistradas.unshift(nombreCompleto);
+   } else {
+      personasRegistradas.push(nombreCompleto);
+   }
+
    continuar=prompt("¿Desea cargar a otra persona (si o no)?").toLowerCase();
 }
 
+listarRegistrados(personasRegistradas);
 
+const corregir=prompt("¿Alguna persona escribió mal su nombre y querés corregirlo? (si o no)").toLowerCase();
+if(corregir=="si"){
+
+   const nombreACorregir=prompt("Ingresá el nombre (tal cual está escrito) que querés corregir:");
+   if(personasRegistradas.includes(nombreACorregir)){
+
+      const posicion=personasRegistradas.indexOf(nombreACorregir);
+      const nombreCorregido=prompt("Ingresá el nombre corregido:");
+
+      personasRegistradas.splice(posicion,1, nombreCorregido);
+      console.log("Nombre corregido. Registro actualizado:");
+
+      listarRegistrados(personasRegistradas);
+   }else{
+      console.log(nombreACorregir + " no está registrado, no se puede corregir");
+   }
+}else{
+   console.log("No se realizaron correcciones");
+}
 
